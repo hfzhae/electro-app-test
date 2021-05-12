@@ -5,9 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "electron .",
-    "packager": "electron-packager . ebClient --out build --asar --overwrite --platform=win32 --arch=x64 --icon=./AppSystem.ico",
-    "pack": "electron-builder --dir",
-    "dist": "electron-builder"
+    "packager": "electron-packager . ebClient --out build --asar --overwrite --platform=win32 --arch=x64 --icon=./AppSystem.ico"
   },
   "keywords": [],
   "author": "",
@@ -17,29 +15,5 @@
   },
   "dependencies": {
     "ffi-napi": "^4.0.3"
-  },
-  "build": {
-    "appId": "com.zydsoft.ebclient",
-    "asar": true,
-    "directories": {
-      "output": "build"
-    },
-    "win": {
-      "target": [
-        {
-          "target": "nsis"
-        }
-      ],
-      "icon": "./AppSystem.ico"
-    },
-    "nsis": {
-      "oneClick": false,
-      "allowElevation": true,
-      "allowToChangeInstallationDirectory": true,
-      "installerIcon": "./AppSystem.ico",
-      "uninstallerIcon": "./AppSystem.ico",
-      "createDesktopShortcut": true,
-      "createStartMenuShortcut": true
-    }
   }
 }

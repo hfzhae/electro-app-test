@@ -1,7 +1,33 @@
 
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, Menu, shell, dialog } = require('electron')
 const path = require('path')
 require("./ScalesSDK")(app)
+
+const menus = [{
+  label: '文件',
+  submenu: [
+    {
+      label: '关于我们',
+      click: function () {
+        shell.openExternal('https://zydsoft.com:8092/')
+      }
+    },
+    {
+      label: '退出',
+      click() {
+        const options = {
+          type: 'warning',
+          title: '确认提示',
+          message: "是否要退出？",
+          buttons: ['否', '是']
+        }
+        const result = dialog.showMessageBoxSync(options)
+        console.log(result)
+        result === 1 && app.quit()
+      }
+    }
+  ]
+}]
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -13,7 +39,8 @@ function createWindow() {
       contextIsolation: false // 解决渲染进程报错window.require is not a function得问题
     }
   })
-
+  const mainMenu = Menu.buildFromTemplate(menus);
+  Menu.setApplicationMenu(mainMenu);
   win.loadFile(`${__dirname}/dist/index.html`)
 }
 

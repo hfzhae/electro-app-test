@@ -10,7 +10,6 @@ module.exports = app => {
     const { weight } = arg
     const ScalesSDK = require("./ScalesSDK")
     event.returnValue = obj.OPO_GetResult(weight)
-    console.log(weight)
   })
 }
 
