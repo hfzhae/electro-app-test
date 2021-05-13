@@ -1,14 +1,14 @@
 const { ipcMain } = require('electron')
 const ffi = require("ffi-napi")
-const obj = ffi.Library(`./static/ScalesSDK.dll`, {
-  "OPO_GetResult": ["int", ["int"]],
-  "OPO_Open": ["int", ["string"]],
-})
 
 module.exports = app => {
+  const obj = ffi.Library(`./static/ScalesSDK.dll`, {
+    "OPO_GetResult": ["int", ["int"]],
+    "OPO_Open": ["int", ["string"]],
+  })
   ipcMain.on('ScalesSDK', (event, arg) => {
     const { weight } = arg
-    const ScalesSDK = require("./ScalesSDK")
+    const ScalesSDK = require("./sdk")
     event.returnValue = obj.OPO_GetResult(weight)
   })
 }

@@ -1,7 +1,7 @@
 
 const { app, BrowserWindow, Menu, shell, dialog } = require('electron')
 // const path = require('path')
-require("./ScalesSDK")(app)
+require("./sdk")(app)
 
 const menus = [{
   label: '文件',
@@ -38,6 +38,8 @@ function createWindow() {
     resizable: false,
     maximizable: false,
     minimizable: false,
+    // autoHideMenuBar: true,
+    // closable: true,
     webPreferences: {
       // preload: path.join(__dirname, "preload.js"),
       nodeIntegration: true, // 解决渲染进程报错window.require is not a function得问题
@@ -45,7 +47,8 @@ function createWindow() {
       webSecurity: false // 支持跨域请求
     }
   })
-  const mainMenu = Menu.buildFromTemplate(menus);
+  // const mainMenu = Menu.buildFromTemplate(menus);
+  const mainMenu = Menu.buildFromTemplate([]);
   Menu.setApplicationMenu(mainMenu);
   if (!app.isPackaged) {
     win.loadURL('http://localhost:8080') // 开发环境
